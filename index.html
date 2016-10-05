@@ -1,7 +1,102 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GTM Test</title>
+  <style>
+    td select,
+    td input {
+      width: 150px;
+    }
+
+    label {
+      display: block;
+    }
+
+    .error input,
+    .error textarea {
+      border: 1px solid red;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+  <h3>Simple form for GTM test</h3>
+
+  <form name="testForm" action="success.html" onsubmit="return validate(this);">
+    <table>
+      <tr>
+        <td>First Field *</td>
+        <td>
+          <input name="firstFiled" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>Second Field *</td>
+        <td>
+          <input name="secondField" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>Third Field *</td>
+        <td>
+          <input name="thirdField" type="text">
+        </td>
+      </tr>
+    </table>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function showError(container, errorMessage) {
+      container.className = 'error';
+      var msgElem = document.createElement('span');
+      msgElem.className = "error-message";
+      msgElem.innerHTML = errorMessage;
+      container.appendChild(msgElem);
+    }
+
+    function resetError(container) {
+      container.className = '';
+      if (container.lastChild.className == "error-message") {
+        container.removeChild(container.lastChild);
+      }
+    }
+
+    function validate(form) {
+      var isValid = true;
+    
+      var elems = form.elements;
+
+      resetError(elems.firstFiled.parentNode);
+      if (!elems.firstFiled.value) {
+        showError(elems.firstFiled.parentNode, ' Need to fill');
+        isValid = false;
+      }
+
+      resetError(elems.secondField.parentNode);
+      if (!elems.secondField.value) {
+        showError(elems.secondField.parentNode, ' Need to fill');
+        isValid = false;
+      }
+
+      resetError(elems.thirdField.parentNode);
+      if (!elems.thirdField.value) {
+        showError(elems.thirdField.parentNode, ' Need to fill');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+  </script>
+
 </body>
+
 </html>
