@@ -72,16 +72,20 @@
     function showError(container, errorMessage) {
       container.className = 'error';
       var msgElem = document.createElement('span');
-      msgElem.className = "error-message";
+      msgElem.className = 'error-message';
       msgElem.innerHTML = errorMessage;
       container.appendChild(msgElem);
     }
 
     function resetError(container) {
       container.className = '';
-      if (container.lastChild.className == "error-message") {
+      if (container.lastChild.className == 'error-message') {
         container.removeChild(container.lastChild);
       }
+    }
+
+    function sendGtmEvent(fieldName) {
+      dataLayer.push({'errorField', fieldName, 'event', 'testFormValidationError'})
     }
 
     function validate(form) {
@@ -92,18 +96,21 @@
       resetError(elems.firstFiled.parentNode);
       if (!elems.firstFiled.value) {
         showError(elems.firstFiled.parentNode, ' Need to fill');
+        sendGtmEvent('First Filed');
         isValid = false;
       }
 
       resetError(elems.secondField.parentNode);
       if (!elems.secondField.value) {
         showError(elems.secondField.parentNode, ' Need to fill');
+        sendGtmEvent('Second Field');
         isValid = false;
       }
 
       resetError(elems.thirdField.parentNode);
       if (!elems.thirdField.value) {
         showError(elems.thirdField.parentNode, ' Need to fill');
+        sendGtmEvent('Third Field');
         isValid = false;
       }
 
