@@ -85,7 +85,7 @@
     }
 
     function sendGtmEvent(fieldName) {
-      dataLayer.push({'errorField', fieldName, 'event', 'testFormValidationError'})
+      dataLayer.push({'errorField': fieldName, 'event': 'testFormValidationError'});
     }
 
     function validate(form) {
@@ -96,7 +96,7 @@
       resetError(elems.firstFiled.parentNode);
       if (!elems.firstFiled.value) {
         showError(elems.firstFiled.parentNode, ' Need to fill');
-        sendGtmEvent('First Filed');
+        sendGtmEvent('First Field');
         isValid = false;
       }
 
